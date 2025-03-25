@@ -19,9 +19,10 @@ case $arch in
     ;;
 esac
 
-link="https://github.com/savioruz/nitch/releases/download/${latest_version}/nitch-${latest_version}-linux-${arch}.tar.gz"
+version_number=${latest_version#v}
+link="https://github.com/savioruz/nitch/releases/download/${latest_version}/nitch-${version_number}-linux-${arch}.tar.gz"
 
-echo ""
+echo "Downloading from: $link"
 
 read -p "Install for all users? (y/n): " symbolsYN
 echo "Installation..."
@@ -29,16 +30,27 @@ echo "Installation..."
 case $symbolsYN in
   "y")
     dir="/usr/local/bin/nitch"
+    use_sudo="sudo"
     ;;
   "n")
     dir="$HOME/.local/bin/nitch"
+    use_sudo=""
     if [ ! -d "$HOME/.local/bin" ]; then
       mkdir -p "$HOME/.local/bin"
     fi
     ;;
 esac
 
-# Download and extract the binary
-wget -q --show-progress -O - $link | tar -xz -C $(dirname $dir)
+temp_file=$(mktemp)
+wget -q --show-progress -O $temp_file $link
 
-echo "Installation complete."
+if file $temp_file | grep -q 'gzip compressed data'; then
+  $use_sudo tar -xz -C $(dirname $dir) -f $temp_file
+  $use_sudo chmod +x $dir
+  echo "Installation complete."
+else
+  echo "Error: Downloaded file is not a valid gzip archive."
+  exit 1
+fi
+
+rm $temp_file

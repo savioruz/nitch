@@ -47,10 +47,18 @@ jobs:
         run: nimble build -d:release
       
       - name: Build for ARM
-        run: nimble build -d:release --cpu:arm --os:linux
+        run: |
+          mv nitch nitch.amd64  # Save AMD64 binary
+          nimble build -d:release --cpu:arm --os:linux
+          mv nitch nitch.arm
+          mv nitch.amd64 nitch  # Restore AMD64 binary
 
       - name: Build for ARM64
-        run: nimble build -d:release --cpu:arm64 --os:linux
+        run: |
+          mv nitch nitch.amd64  # Save AMD64 binary
+          nimble build -d:release --cpu:arm64 --os:linux
+          mv nitch nitch.arm64
+          mv nitch.amd64 nitch  # Restore AMD64 binary
 
       - name: Compress binaries
         run: |
@@ -59,11 +67,13 @@ jobs:
 
       - name: Compress ARM binary
         run: |
+          mv nitch.arm nitch
           tar -czf "nitch-${{ steps.get_version.outputs.VERSION }}-linux-arm.tar.gz" nitch
           sha256sum "nitch-${{ steps.get_version.outputs.VERSION }}-linux-arm.tar.gz" > "nitch-${{ steps.get_version.outputs.VERSION }}-linux-arm.tar.gz.sha256"
 
       - name: Compress ARM64 binary
         run: |
+          mv nitch.arm64 nitch
           tar -czf "nitch-${{ steps.get_version.outputs.VERSION }}-linux-arm64.tar.gz" nitch
           sha256sum "nitch-${{ steps.get_version.outputs.VERSION }}-linux-arm64.tar.gz" > "nitch-${{ steps.get_version.outputs.VERSION }}-linux-arm64.tar.gz.sha256"
 
