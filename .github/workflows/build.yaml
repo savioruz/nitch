@@ -47,14 +47,14 @@ jobs:
           sha256sum "nitch-${{ steps.get_version.outputs.VERSION }}-linux-amd64.tar.gz" > "nitch-${{ steps.get_version.outputs.VERSION }}-linux-amd64.tar.gz.sha256"
       
       - name: Upload Debug Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: nitch-${{ steps.get_version.outputs.VERSION }}-debug
           path: nitch
           retention-days: 7
       
       - name: Upload Release Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: nitch-${{ steps.get_version.outputs.VERSION }}-release
           path: |
