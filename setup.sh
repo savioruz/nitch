@@ -1,27 +1,44 @@
 #!/bin/sh
 
-linkNerd="https://github.com/unxsh/nitch/releases/download/0.1.6/nitchNerd"
-linkNoNerd="https://github.com/unxsh/nitch/releases/download/0.1.6/nitchNoNerd"
+latest_version=$(curl -s https://api.github.com/repos/savioruz/nitch/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
 
-sudo rm -fv /usr/local/bin/nitch
+arch=$(uname -m)
+case $arch in
+  x86_64)
+    arch="amd64"
+    ;;
+  armv7l)
+    arch="arm"
+    ;;
+  aarch64)
+    arch="arm64"
+    ;;
+  *)
+    echo "Unsupported architecture: $arch"
+    exit 1
+    ;;
+esac
+
+link="https://github.com/savioruz/nitch/releases/download/${latest_version}/nitch-${latest_version}-linux-${arch}.tar.gz"
 
 echo ""
 
-read -p "Use nerd font symbols? (y/n): " symbolsYN
+read -p "Install for all users? (y/n): " symbolsYN
 echo "Installation..."
 
 case $symbolsYN in
   "y")
-    wget $linkNerd
-    chmod +x nitchNerd
-    sudo mv nitchNerd /usr/local/bin/nitch
-  ;;
-
+    dir="/usr/local/bin/nitch"
+    ;;
   "n")
-    wget $linkNoNerd
-    chmod +x nitchNoNerd
-    sudo mv nitchNoNerd /usr/local/bin/nitch
-  ;;
+    dir="$HOME/.local/bin/nitch"
+    if [ ! -d "$HOME/.local/bin" ]; then
+      mkdir -p "$HOME/.local/bin"
+    fi
+    ;;
 esac
 
-echo ""
+# Download and extract the binary
+wget -q --show-progress -O - $link | tar -xz -C $(dirname $dir)
+
+echo "Installation complete."

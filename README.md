@@ -1,7 +1,5 @@
 <div align="center">
 
-<img src="https://cdn.discordapp.com/attachments/955362477137362954/996769449480826971/2022-07-13_16-25.png" width="350px">
-
 # `NiTch`
 
 <h3>
@@ -23,8 +21,6 @@
 
 # Description 📖
 
-<img src="https://media.discordapp.net/attachments/955362477137362954/997839005460725841/2022-07-16_15-15_1.png" width="42%" align="right">
-
 `nitch` is a small and incredibly fast system fetch written fully in `nim👑` without any dependencies, on my pc
 it executes in around 1.70 miliseconds.
 
@@ -42,7 +38,7 @@ why `nim👑`? because it's fast and simple
 
 # Installation ☁️
 ```fish
-wget https://raw.githubusercontent.com/unxsh/nitch/main/setup.sh && sh setup.sh
+wget https://raw.githubusercontent.com/savioruz/nitch/main/setup.sh && sh setup.sh
 ```
 
 # Usage 🪨
