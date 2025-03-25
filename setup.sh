@@ -1,5 +1,7 @@
 #!/bin/sh
 
+read -p "Install for all users? (y/n): " symbolsYN
+
 latest_version=$(curl -s https://api.github.com/repos/savioruz/nitch/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
 
 arch=$(uname -m)
@@ -22,10 +24,7 @@ esac
 version_number=${latest_version#v}
 link="https://github.com/savioruz/nitch/releases/download/${latest_version}/nitch-${version_number}-linux-${arch}.tar.gz"
 
-echo "Downloading from: $link"
-
-read -p "Install for all users? (y/n): " symbolsYN
-echo "Installation..."
+echo "Installing..."
 
 case $symbolsYN in
   "y")
@@ -42,7 +41,7 @@ case $symbolsYN in
 esac
 
 temp_file=$(mktemp)
-wget -q --show-progress -O $temp_file $link
+wget -q -O $temp_file $link
 
 if file $temp_file | grep -q 'gzip compressed data'; then
   $use_sudo tar -xz -C $(dirname $dir) -f $temp_file
