@@ -26,6 +26,11 @@ jobs:
       - name: Install dependencies
         run: nimble install -y
       
+      - name: Install ARM cross-compilation tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-arm-linux-gnueabihf gcc-aarch64-linux-gnu
+      
       - name: Extract version from tag
         id: get_version
         run: |

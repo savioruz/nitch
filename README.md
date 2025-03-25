@@ -7,15 +7,14 @@
 </h3>
 <br>
 
-![Maintenance](https://shields.io/maintenance/yes/2022?style=for-the-badge)
-![License](https://shields.io/github/license/unxsh/nitch?style=for-the-badge)
-![Commits](https://shields.io/github/commit-activity/m/unxsh/nitch?style=for-the-badge)
+![License](https://shields.io/github/license/savioruz/nitch?style=for-the-badge)
+![Commits](https://shields.io/github/commit-activity/m/savioruz/nitch?style=for-the-badge)
 
-![GitHub Repo stars](https://img.shields.io/github/stars/unxsh/nitch?style=for-the-badge)
-![GitHub issues](https://img.shields.io/github/issues/unxsh/nitch?style=for-the-badge)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/unxsh/nitch?style=for-the-badge)
+![GitHub Repo stars](https://img.shields.io/github/stars/savioruz/nitch?style=for-the-badge)
+![GitHub issues](https://img.shields.io/github/issues/savioruz/nitch?style=for-the-badge)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/savioruz/nitch?style=for-the-badge)
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/unxsh/nitch?style=for-the-badge)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/savioruz/nitch?style=for-the-badge)
 
 </div>
 
